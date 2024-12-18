@@ -1,0 +1,24 @@
+<div *ngIf="isBrowser">
+  <div style="width: 100%; height: 400px;" class="ag-theme-alpine">
+    <ag-grid-angular [rowData]="employees" [columnDefs]="columnDefs" [gridOptions]="gridOptions" class="ag-theme-alpine"
+      [pagination]="true" [rowSelection]="'single'" (rowClicked)="selectedEmployee = $event.data || null">
+    </ag-grid-angular>
+
+    <div class="actions">
+      <button (click)="onAdd()">Add New Employee</button>
+      <button [disabled]="!selectedEmployee" (click)="onEdit()">Edit Employee</button>
+      <button [disabled]="!selectedEmployee" (click)="onDelete()">Delete Employee</button>
+    </div>
+
+    <!-- Employee Form for Add/Edit -->
+  <app-employeeform
+  *ngIf="isFormVisible"
+  [employee]="selectedEmployee"
+  (save)="handleSave($event)"
+  (close)="isFormVisible = false"
+  ></app-employeeform>
+  
+</div>
+
+  
+</div>

@@ -1,0 +1,46 @@
+<div class="employee-form">
+    <h2>{{ employee ? 'Edit Employee' : 'Add New Employee' }}</h2>
+  
+    <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="formData.name"
+          name="name"
+          required
+          #name="ngModel"
+        />
+        <div *ngIf="name.invalid && name.touched" class="error">
+          Name is required.
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="formData.email"
+          name="email"
+          required
+          #email="ngModel"
+        />
+        <div *ngIf="email.invalid && email.touched" class="error">
+          Valid email is required.
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="form-buttons">
+        <button type="submit" [disabled]="employeeForm.invalid" (click)="onSubmit()">
+          {{ employee ? 'Save' : 'Add' }}
+        </button>
+        <button type="button" (click)="onClose()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
