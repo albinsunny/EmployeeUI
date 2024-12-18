@@ -45,11 +45,7 @@ employees: Employee[] = [
 // Currently selected employee
 selectedEmployee: Employee | null = null;
 isFormVisible: boolean = false;
-gridApi: any
 
-onGridReady(params: any) {
-  this.gridApi = params.api; // Store the grid API
-}
 
 columnDefs: ColDef<Employee>[] = [
   { headerName: 'ID', field: 'id', sortable: true, filter: true },
@@ -100,26 +96,16 @@ deleteEmployee(employeeId: number) {
 private addEmployee(newEmployee: Employee) {
   const nextId = this.employees.length > 0 ? Math.max(...this.employees.map(e => e.id)) + 1 : 1;
   newEmployee.id = nextId;
-  console.log("-------------HERE----------------------")
-  console.log(newEmployee)
-  console.log(this.employees.length)
-  this.employees.push(newEmployee);
-  this.employees =this.employees
-  //console.log(this.employees.length)
- // this.refreshGrid()
 
+  this.employees = [...this.employees, newEmployee]
+  console.log(this.employees.length)
+  
 }
 
 private editEmployee(updatedEmployee: Employee) {
   const index = this.employees.findIndex(e => e.id === updatedEmployee.id);
   if (index !== -1) {
     this.employees[index] = updatedEmployee;
-  }
-}
-
-refreshGrid() {
-  if (this.gridApi) {
-    this.gridApi.setRowData(this.employees); // Update the grid data
   }
 }
 
